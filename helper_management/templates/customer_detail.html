@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Customer Details</h1>
+<p>Name: {{ customer.name }}</p>
+<p>Address: {{ customer.address }}</p>
+<p>Phone Number: {{ customer.phone_number }}</p>
+<p>email: {{ customer.email }}</p>
+<p>assigned_helper: {{ customer.assigned_helper }}</p>
+{% if customer.assigned_helper %}
+<a href="{% url 'helper_details' customer.assigned_helper.pk %}">View Helper Details</a>
+<form action="{% url 'remove_helper' customer.pk %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Remove Helper</button>
+</form>
+
+{% endif %}
+
+{% endblock content %}
